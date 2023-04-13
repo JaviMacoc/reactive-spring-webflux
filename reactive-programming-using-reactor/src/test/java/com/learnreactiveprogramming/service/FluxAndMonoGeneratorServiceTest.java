@@ -58,10 +58,10 @@ class FluxAndMonoGeneratorServiceTest {
     @Test
     public void namesFlux_flatMap(){
         
-        var namesFlux_flatMap = fluxAndMonoGeneratorService.fluxNames_flatMap2(5);
+        var namesFlux_flatMap = fluxAndMonoGeneratorService.fluxNames_flatMap(5);
                 
         StepVerifier.create(namesFlux_flatMap) 
-                .expectNextCount(2)
+                .expectNextCount(12)
 //                .expectNext("6","-","J","A","V","I","E","R","6","-","C","A","R","L","O","S")
                 .verifyComplete();
     }
@@ -149,6 +149,39 @@ class FluxAndMonoGeneratorServiceTest {
         StepVerifier.create(namesFlux)
 //                .expectNext("Abel","Ana","Rolando","Roberto","Graciela","Boromir")
                 .expectNext("Abel","Rolando","Graciela","Ana","Roberto","Boromir")                
+                .verifyComplete();        
+    }
+    
+    @Test
+    public void namesFlux_zip(){
+        
+        var namesFlux = fluxAndMonoGeneratorService.exploreZip();
+        
+        StepVerifier.create(namesFlux)
+//                .expectNext("Abel","Ana","Rolando","Roberto","Graciela","Boromir")
+                .expectNextCount(3)                
+                .verifyComplete();        
+    }
+    
+    @Test
+    public void namesFlux_zip2(){
+        
+        var namesFlux = fluxAndMonoGeneratorService.exploreZip2();
+        
+        StepVerifier.create(namesFlux)
+//                .expectNext("Abel","Ana","Rolando","Roberto","Graciela","Boromir")
+                .expectNextCount(3)                
+                .verifyComplete();        
+    }
+    
+    @Test
+    public void namesMono_zip2(){
+        
+        var namesFlux = fluxAndMonoGeneratorService.exploreZipWith();
+        
+        StepVerifier.create(namesFlux)
+//                .expectNext("Abel","Ana","Rolando","Roberto","Graciela","Boromir")
+                .expectNextCount(1)                
                 .verifyComplete();        
     }
     
